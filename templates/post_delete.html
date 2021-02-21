@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Post edit {% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'board_topics' topic.board.pk %}">{{ topic.board.name }}</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'topic_posts' topic.board.pk topic.pk %}">{{ topic.subject }}</a></li>
+    <li class="breadcrumb-item active">{{ topic.subject }}</li>
+{% endblock %}
+
+{% block content %}
+    <form method="post" class="mb-4">
+    {% csrf_token %}
+    {% include 'includes/form.html' %}
+    <h3>Are you sure?</h3>
+    <button type="submit" class="btn btn-success">Yes</button> | <a href="{% url 'topic_posts' topic.board.pk topic.pk %}" class="btn btn-success">No</a>
+    </form>
+{% endblock %}
